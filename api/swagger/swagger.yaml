@@ -1,0 +1,57 @@
+swagger: '2.0'
+info:
+  title: Backend API
+  description: A API é utilizada por uma aplicação de Front-end
+  version: 1.0.0
+
+consumes:
+ - application/json
+produces:
+ - application/json
+paths:
+  /hello_world:
+    get:
+      summary: Todos os registros da collection HelloWorld
+      description: Esse endpoint salva um novo e retorna todos os registros da collection HelloWorld
+      parameters: []
+      tags:
+      - HelloWorld
+      responses:
+        '200':
+          description: Um array com todos os registros da collection HelloWorld
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/HelloWorld"
+
+  /hello_world/{_id}:
+    parameters:
+      - $ref: "#/parameters/_id"
+    get:
+      description: Retorna um registro pelo Id. 'Sucesso' caso _id seja 1234567890 ou 'Erro' caso _id seja 0987654321
+      tags:
+      - HelloWorld
+      responses:
+        default:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/HelloWorld"
+
+parameters:
+  _id:
+    name: _id
+    in: path
+    description: _id HelloWorld
+    required: true
+    type: string
+
+definitions:
+  HelloWorld:
+    type: object
+    properties:
+      _id:
+        type: string
+        description: Id do registro na collection.
+      created_at:
+        type: object
+        description: Objeto Date represetando o momento de criação do registro.
